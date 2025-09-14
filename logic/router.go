@@ -178,13 +178,13 @@ func (r *Route) Execute(ctx *MessageContext) error {
 			return nil // 不匹配，跳过
 		}
 	}
-	
+
 	// 构建中间件链
 	handler := r.Handler.Handle
 	for i := len(r.Middlewares) - 1; i >= 0; i-- {
 		handler = r.Middlewares[i](handler)
 	}
-	
+
 	return handler(ctx)
 }
 
@@ -236,17 +236,17 @@ func (router *Router) Handle(ctx *MessageContext) {
 	for _, route := range routes {
 		// 创建完整的中间件链（全局中间件 + 路由中间件）
 		handler := route.Handler.Handle
-		
+
 		// 先添加路由中间件
 		for i := len(route.Middlewares) - 1; i >= 0; i-- {
 			handler = route.Middlewares[i](handler)
 		}
-		
+
 		// 再添加全局中间件
 		for i := len(middlewares) - 1; i >= 0; i-- {
 			handler = middlewares[i](handler)
 		}
-		
+
 		// 检查路由匹配
 		matched := true
 		for _, matcher := range route.Matchers {
@@ -255,7 +255,7 @@ func (router *Router) Handle(ctx *MessageContext) {
 				break
 			}
 		}
-		
+
 		if matched {
 			if err := handler(ctx); err != nil {
 				router.errorHandler(err, ctx)

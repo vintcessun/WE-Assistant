@@ -4,9 +4,6 @@ import (
 	"context"
 
 	"github.com/vintcessun/WE-Assistant/utils"
-	"github.com/LagrangeDev/LagrangeGo/client"
-	"github.com/LagrangeDev/LagrangeGo/client/event"
-	"github.com/LagrangeDev/LagrangeGo/message"
 )
 
 // EchoHandler 回声处理器
@@ -146,6 +143,13 @@ func RegisterCustomLogic() {
 		}, NewTextMatcher("hello", false))
 	*/
 
+	Manager.HandleGroupMessage(func(ctx *MessageContext) error {
+		return HandleGroupMessage(ctx)
+	})
+	Manager.HandlePrivateMessage(func(ctx *MessageContext) error {
+		return HandlePrivateMessage((ctx))
+	})
+
 	// 注册私聊消息处理
 	/*
 		Manager.HandlePrivateMessage(func(ctx *MessageContext) error {
@@ -171,39 +175,4 @@ func RegisterCustomLogic() {
 	})
 
 	utils.Info("自定义逻辑注册完成")
-}
-
-// 向后兼容的处理器实现
-type PrivateMessageHandler struct{}
-
-func (h *PrivateMessageHandler) Handle(client *client.QQClient, msg interface{}) error {
-	if event, ok := msg.(*message.PrivateMessage); ok {
-		client.SendPrivateMessage(event.Sender.Uin, []message.IMessageElement{
-			message.NewText("Hello World!"),
-		})
-	}
-	return nil
-}
-
-type GroupMessageHandler struct{}
-
-func (h *GroupMessageHandler) Handle(client *client.QQClient, msg interface{}) error {
-	if event, ok := msg.(*message.GroupMessage); ok {
-		client.SendGroupMessage(event.GroupUin, []message.IMessageElement{
-			message.NewText("Hello World!"),
-		})
-	}
-	return nil
-}
-
-type FriendRequestHandlerOld struct{}
-
-func (h *FriendRequestHandlerOld) Handle(client *client.QQClient, msg interface{}) error {
-	if event, ok := msg.(*event.NewFriendRequest); ok {
-		_ = event
-		// event.SourceUid
-		// logrus.Println("UID" + event.SourceUid)
-		// ctx.Client.SetFriendRequest(true, event.SourceUID)
-	}
-	return nil
 }

@@ -34,3 +34,98 @@
 [2025-09-14 22:24:36] [[32mINFO[0m]: 连接已建立
 [2025-09-14 22:24:36] [[32mINFO[0m]: 自定义逻辑注册完成
 [2025-09-14 22:31:40] [[32mINFO[0m]: 签名文件保存成功
+[2025-09-14 23:07:49] [[32mINFO[0m]: 签名文件加载成功
+[2025-09-14 23:07:49] [[32mINFO[0m]: 尝试使用 快速登录 登录
+[2025-09-14 23:07:49] [[32mINFO[0m]: Lgr -> connect to server: 198.18.0.20:8080
+[2025-09-14 23:07:49] [[32mINFO[0m]: 使用 快速登录 登录成功
+[2025-09-14 23:07:49] [[32mINFO[0m]: 连接已建立
+[2025-09-14 23:07:49] [[32mINFO[0m]: 自定义逻辑注册完成
+[2025-09-14 23:08:02] [[31mERROR[0m]: Lgr -> [client.(*EventHandle[...]).dispatch.func1] event error: runtime error: invalid memory address or nil pointer dereference
+goroutine 56 [running]:
+runtime/debug.Stack()
+	D:/Software/Go/src/runtime/debug/stack.go:26 +0x5e
+github.com/LagrangeDev/LagrangeGo/client.(*EventHandle[...]).dispatch.func1()
+	C:/Users/vintc/go/pkg/mod/github.com/!lagrange!dev/!lagrange!go@v0.1.4/client/event.go:34 +0x65
+panic({0x7ff628967660?, 0x7ff628d8eea0?})
+	D:/Software/Go/src/runtime/panic.go:783 +0x132
+github.com/vintcessun/WE-Assistant/logic.(*Router).Handle(0xc0000de870, 0xc000390f90)
+	C:/Users/vintc/Desktop/go/WE-Assistant/logic/router.go:253 +0x33d
+github.com/vintcessun/WE-Assistant/logic.(*LogicManager).processMessage(0xc000008fd8, 0xc000390f90)
+	C:/Users/vintc/Desktop/go/WE-Assistant/logic/logic.go:113 +0x38
+github.com/vintcessun/WE-Assistant/logic.(*LogicManager).SetupEventListeners.func2(0xc0000be308, 0xc000156370)
+	C:/Users/vintc/Desktop/go/WE-Assistant/logic/logic.go:97 +0xae
+github.com/LagrangeDev/LagrangeGo/client.(*EventHandle[...]).dispatch(0xc000156370?, 0xc0000be308?, 0xc000156370)
+	C:/Users/vintc/go/pkg/mod/github.com/!lagrange!dev/!lagrange!go@v0.1.4/client/event.go:38 +0xc3
+github.com/LagrangeDev/LagrangeGo/client.decodeOlPushServicePacket(0xc0000be308, 0xc000112280)
+	C:/Users/vintc/go/pkg/mod/github.com/!lagrange!dev/!lagrange!go@v0.1.4/client/listener.go:55 +0xf70
+github.com/LagrangeDev/LagrangeGo/client.(*QQClient).netLoop.func2(0xc000112280)
+	C:/Users/vintc/go/pkg/mod/github.com/!lagrange!dev/!lagrange!go@v0.1.4/client/network.go:411 +0x150
+created by github.com/LagrangeDev/LagrangeGo/client.(*QQClient).netLoop in goroutine 50
+	C:/Users/vintc/go/pkg/mod/github.com/!lagrange!dev/!lagrange!go@v0.1.4/client/network.go:396 +0x4a6
+
+[2025-09-14 23:08:32] [[32mINFO[0m]: 签名文件保存成功
+[2025-09-14 23:09:08] [[32mINFO[0m]: 签名文件加载成功
+[2025-09-14 23:09:08] [[32mINFO[0m]: 尝试使用 快速登录 登录
+[2025-09-14 23:09:08] [[32mINFO[0m]: Lgr -> connect to server: 198.18.0.20:8080
+[2025-09-14 23:09:08] [[32mINFO[0m]: 使用 快速登录 登录成功
+[2025-09-14 23:09:08] [[32mINFO[0m]: 连接已建立
+[2025-09-14 23:09:08] [[32mINFO[0m]: 自定义逻辑注册完成
+[2025-09-14 23:14:21] [[32mINFO[0m]: 签名文件保存成功
+[2025-09-14 23:14:24] [[32mINFO[0m]: 签名文件加载成功
+[2025-09-14 23:14:24] [[32mINFO[0m]: 尝试使用 快速登录 登录
+[2025-09-14 23:14:24] [[32mINFO[0m]: Lgr -> connect to server: 198.18.0.20:8080
+[2025-09-14 23:14:24] [[32mINFO[0m]: 使用 快速登录 登录成功
+[2025-09-14 23:14:24] [[32mINFO[0m]: 连接已建立
+[2025-09-14 23:14:24] [[32mINFO[0m]: 自定义逻辑注册完成
+[2025-09-14 23:14:30] [[32mINFO[0m]: 收到私聊消息: &{%!s(uint32=42489) %!s(uint32=1749277018) %!s(uint32=0) %!s(uint32=3916030049) %!s(uint32=2218870695) %!s(uint32=1757862870) %!s(*message.Sender=&{2218870695 u_AggEXOTRJoz-qNUNNpQMyw 恒星  true}) [%!s(*message.TextElement=&{111})]}
+[2025-09-14 23:14:50] [[32mINFO[0m]: 签名文件保存成功
+[2025-09-14 23:14:54] [[32mINFO[0m]: 签名文件加载成功
+[2025-09-14 23:14:54] [[32mINFO[0m]: 尝试使用 快速登录 登录
+[2025-09-14 23:14:54] [[32mINFO[0m]: Lgr -> connect to server: 198.18.0.20:8080
+[2025-09-14 23:14:54] [[32mINFO[0m]: 使用 快速登录 登录成功
+[2025-09-14 23:14:54] [[32mINFO[0m]: 连接已建立
+[2025-09-14 23:14:54] [[32mINFO[0m]: 自定义逻辑注册完成
+[2025-09-14 23:14:56] [[32mINFO[0m]: 收到私聊消息: 111
+[2025-09-14 23:15:02] [[32mINFO[0m]: 收到私聊消息: [图片]
+[2025-09-14 23:25:46] [[32mINFO[0m]: 签名文件保存成功
+[2025-09-14 23:25:50] [[32mINFO[0m]: 签名文件加载成功
+[2025-09-14 23:25:50] [[32mINFO[0m]: 尝试使用 快速登录 登录
+[2025-09-14 23:25:50] [[32mINFO[0m]: Lgr -> connect to server: 198.18.0.20:8080
+[2025-09-14 23:25:50] [[32mINFO[0m]: 使用 快速登录 登录成功
+[2025-09-14 23:25:50] [[32mINFO[0m]: 连接已建立
+[2025-09-14 23:25:50] [[32mINFO[0m]: 自定义逻辑注册完成
+[2025-09-14 23:25:54] [[32mINFO[0m]: 收到群聊消息:
+{
+  "type": "group",
+  "sender": "主人",
+  "sender_id": 2218870695,
+  "group_id": 536405397,
+  "time": "2025-09-14 23:25:53",
+  "elements": [
+    {
+      "type": "text",
+      "content": "111"
+    }
+  ],
+  "summary": "111"
+}
+[2025-09-14 23:28:18] [[32mINFO[0m]: 签名文件保存成功
+[2025-09-14 23:28:22] [[32mINFO[0m]: 签名文件加载成功
+[2025-09-14 23:28:22] [[32mINFO[0m]: 尝试使用 快速登录 登录
+[2025-09-14 23:28:22] [[32mINFO[0m]: Lgr -> connect to server: 198.18.0.20:8080
+[2025-09-14 23:28:22] [[32mINFO[0m]: 使用 快速登录 登录成功
+[2025-09-14 23:28:22] [[32mINFO[0m]: 连接已建立
+[2025-09-14 23:28:22] [[32mINFO[0m]: 自定义逻辑注册完成
+[2025-09-14 23:28:23] [[32mINFO[0m]: 收到群聊消息:
+{"type":"group","sender":"主人","sender_id":2218870695,"group_id":536405397,"time":"2025-09-14 23:28:23","elements":[{"type":"text","content":"111"}],"summary":"111"}
+[2025-09-14 23:28:30] [[32mINFO[0m]: 收到私聊消息:
+{"type":"private","sender":"恒星","sender_id":2218870695,"time":"2025-09-14 23:28:29","elements":[{"type":"text","content":"7363"}],"summary":"7363"}
+[2025-09-14 23:29:16] [[32mINFO[0m]: 签名文件保存成功
+[2025-09-14 23:29:20] [[32mINFO[0m]: 签名文件加载成功
+[2025-09-14 23:29:20] [[32mINFO[0m]: 尝试使用 快速登录 登录
+[2025-09-14 23:29:20] [[32mINFO[0m]: Lgr -> connect to server: 198.18.0.20:8080
+[2025-09-14 23:29:20] [[32mINFO[0m]: 使用 快速登录 登录成功
+[2025-09-14 23:29:20] [[32mINFO[0m]: 连接已建立
+[2025-09-14 23:29:20] [[32mINFO[0m]: 自定义逻辑注册完成
+[2025-09-14 23:29:23] [[32mINFO[0m]: 收到私聊消息:{"type":"private","sender":"恒星","sender_id":2218870695,"elements":[{"type":"text","content":"2763"}],"summary":"2763"}
+[2025-09-14 23:29:28] [[32mINFO[0m]: 收到群聊消息:{"type":"group","sender":"主人","sender_id":2218870695,"group_id":536405397,"elements":[{"type":"text","content":"111"}],"summary":"111"}
