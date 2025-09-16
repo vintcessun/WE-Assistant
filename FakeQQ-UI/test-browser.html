@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FakeQQ-UI 测试页面</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f5f5f5;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #333;
+        text-align: center;
+      }
+
+      .test-data {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+        border-left: 4px solid #007bff;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 10px 0;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .result {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 5px;
+      }
+
+      .success {
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+      }
+
+      .error {
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+      }
+
+      .log {
+        font-family: monospace;
+        white-space: pre-wrap;
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 10px 0;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>FakeQQ-UI 消息渲染测试</h1>
+
+      <div class="test-data">
+        <h3>测试数据:</h3>
+        <pre id="testDataDisplay"></pre>
+      </div>
+
+      <button onclick="testAPI()">测试API</button>
+      <button onclick="openResultPage()">打开结果页面</button>
+
+      <div id="result" class="result" style="display: none"></div>
+      <div class="log" id="logOutput"></div>
+    </div>
+
+    <script>
+      // 测试数据
+      const testData = {
+        id: {
+          other: '2218870695',
+          self: '3916030049'
+        },
+        messages: [
+          { type: 'other', message: [{ type: 'text', data: { text: '这是引用的消息内容' } }] },
+          {
+            type: 'self',
+            message: [
+              {
+                type: 'text',
+                data: {
+                  text: '你好，这是一条测试消息'
+                }
+              }
+            ]
+          },
+          {
+            type: 'other',
+            message: [
+              {
+                type: 'text',
+                data: {
+                  text: '我收到了你的消息'
+                }
+              },
+              {
+                type: 'image',
+                data: {
+                  url: 'https://q1.qlogo.cn/g?b=qq&nk=2595201156&s=640'
+                }
+              }
+            ]
+          },
+          {
+            type: 'self',
+            message: [
+              {
+                type: 'reply',
+                data: {
+                  head: '恒星',
+                  message: '这是引用的消息内容'
+                }
+              },
+              {
+                type: 'text',
+                data: {
+                  text: '我回复了你的消息'
+                }
+              }
+            ]
+          }
+        ]
+      }
+
+      // 显示测试数据
+      document.getElementById('testDataDisplay').textContent = JSON.stringify(testData, null, 2)
+
+      // 日志输出函数
+      function log(message, type = 'info') {
+        const logOutput = document.getElementById('logOutput')
+        const timestamp = new Date().toLocaleTimeString()
+        const logEntry = document.createElement('div')
+        logEntry.innerHTML = `<span style="color: #666;">[${timestamp}]</span> ${message}`
+
+        if (type === 'error') {
+          logEntry.style.color = '#dc3545'
+        } else if (type === 'success') {
+          logEntry.style.color = '#28a745'
+        }
+
+        logOutput.appendChild(logEntry)
+        logOutput.scrollTop = logOutput.scrollHeight
+      }
+
+      // 测试API函数
+      async function testAPI() {
+        const resultDiv = document.getElementById('result')
+        resultDiv.style.display = 'none'
+
+        log('正在测试API...', 'info')
+
+        try {
+          const response = await fetch('/render', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(testData)
+          })
+
+          if (response.ok) {
+            log('API测试成功！', 'success')
+            log('响应类型: ' + response.headers.get('content-type'), 'info')
+            log('响应状态: ' + response.status, 'info')
+
+            // 如果是图片响应，我们可以显示在页面上
+            if (response.headers.get('content-type') === 'image/png') {
+              const blob = await response.blob()
+              const url = URL.createObjectURL(blob)
+
+              resultDiv.innerHTML = `
+                            <h3>渲染结果:</h3>
+                            <img src="${url}" alt="渲染结果" style="max-width: 100%; border: 1px solid #ddd; border-radius: 4px;">
+                            <p><a href="${url}" download="test-output.png">下载图片</a></p>
+                        `
+              resultDiv.className = 'result success'
+              resultDiv.style.display = 'block'
+
+              log('图片已生成，显示在页面上方', 'success')
+            } else {
+              const text = await response.text()
+              resultDiv.innerHTML = `
+                            <h3>响应内容:</h3>
+                            <pre>${text}</pre>
+                        `
+              resultDiv.className = 'result'
+              resultDiv.style.display = 'block'
+
+              log('收到文本响应: ' + text.substring(0, 100) + '...', 'info')
+            }
+          } else {
+            const error = await response.text()
+            log('API测试失败: ' + response.status + ' ' + response.statusText, 'error')
+            log('错误详情: ' + error, 'error')
+
+            resultDiv.innerHTML = `
+                        <h3>错误信息:</h3>
+                        <p>状态: ${response.status} ${response.statusText}</p>
+                        <pre>${error}</pre>
+                    `
+            resultDiv.className = 'result error'
+            resultDiv.style.display = 'block'
+          }
+        } catch (error) {
+          log('测试过程中出错: ' + error.message, 'error')
+
+          resultDiv.innerHTML = `
+                    <h3>连接错误:</h3>
+                    <p>${error.message}</p>
+                    <p>请确保服务器正在运行在 </p>
+                `
+          resultDiv.className = 'result error'
+          resultDiv.style.display = 'block'
+        }
+      }
+
+      // 打开结果页面函数
+      function openResultPage() {
+        // 使用fetch API发送POST请求
+        fetch('/render', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(testData)
+        })
+          .then(response => {
+            if (response.ok) {
+              return response.text()
+            }
+            throw new Error('请求失败: ' + response.status)
+          })
+          .then(html => {
+            // 在新窗口中打开结果
+            const newWindow = window.open('', '_blank')
+            newWindow.document.write(html)
+            newWindow.document.close()
+            log('结果页面已打开', 'success')
+          })
+          .catch(error => {
+            log('打开结果页面失败: ' + error.message, 'error')
+          })
+
+        log('正在打开结果页面...', 'info')
+      }
+
+      // 页面加载时自动测试（可选）
+      // window.addEventListener('load', () => {
+      //     log('页面加载完成，可以点击"测试API"按钮开始测试', 'info');
+      // });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+# pack-refs with: peeled fully-peeled sorted 
+8b7461c524a1fb37db91a680163a9390113505b1 refs/remotes/origin/dependabot/npm_and_yarn/nanoid-3.3.8
+a6a87dd97f7231b9a3162eadbbc813fa8767f373 refs/remotes/origin/dependabot/npm_and_yarn/vite-5.4.12
+e2fb154e5d08e2a3ae19bba989bf8320fddc66f2 refs/remotes/origin/master
+cfde7992bf7d93c1e640fe6d9809967636daf0e5 refs/remotes/origin/remake
+005169afc351731bc39ec743e003c9bd9028f8f5 refs/tags/v0.1.0
+ef53639961b72cb44274c6bae449687fef4e75be refs/tags/v0.2.0
+b903837cf9ab61b5f1c028674755de87e0a01c7d refs/tags/v0.3.0
+36d9862bdb1c015ca3af01c07656aafbb46b85e0 refs/tags/v0.3.2
+^bcf1bbb9f73908871fdf8a7de87c08992e762eb7
+6fb760f104f97d309ce09c4f0fce41bcef97544a refs/tags/v0.3.3
+cfde7992bf7d93c1e640fe6d9809967636daf0e5 refs/tags/v0.3.4
